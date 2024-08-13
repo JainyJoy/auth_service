@@ -8,20 +8,19 @@ class UserController:
     def __init__(self):
         self.__user_repo = UserRepository()
 
-    def register_user(self, payload: dict):
-        check_user = self.__user_repo.get_user_by_email(payload["email"])
+    async def register_user(self, payload: dict):
+        check_user = await self.__user_repo.get_user_by_email(payload["email"])
         if check_user:
             return "User already exists with the same enail", HTTP_400_BAD_REQUEST
         payload["password"] = get_hashed_password(payload["password"])
-        self.__user_repo.create_user(payload)
+        await self.__user_repo.create_user(payload)
         return "User registration successful", HTTP_201_CREATED
 
-    def login_user(self, payload):
-        db_record = self.__user_repo.get_user_by_email(payload["email"])
+    async def login_user(self, payload):
+        db_record = await self.__user_repo.get_user_by_email(payload["email"])
         if not db_record or not check_password(payload["password"], db_record.password):
             return "Invalid credentials", HTTP_401_UNAUTHORIZED
-        access_token = get_jwt_token(db_record.email)
-        return access_token, HTTP_200_OK
+        return "credential validated", HTTP_200_OK
 
     def fetch_user_profile(self, email=None):
         user_record = self.__user_repo.get_user_by_email(email)

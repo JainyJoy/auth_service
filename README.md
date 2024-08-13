@@ -1,4 +1,4 @@
-# User Auth Service
+# Intelligent Book Management Service
 
 
 
@@ -8,42 +8,13 @@ Sample Flask app which supports basic user registration, login and get data oper
 ## Instructions for local setup
 
 ### Prerequisites:
-1. SQLite DB - https://sqlitebrowser.org/dl/
+1. Postgres DB - https://www.postgresql.org/
 
 ### Steps to execute 
 1. Clone the repo and checkout to ```main``` branch
 2. Install requirements : ```pip install -r requirements.txt```
-3. Run the app : ```python app.py```
+3. Run the app : ```python main.py```
+4. To run the app as docker conainer : ```bash build.sh```
 
 ### Sample requests
-1. Health check
-```curl
-curl --location 'http://localhost:5000/health-check'
-```
-2. Register user
-```curl
-curl --location 'http://localhost:5000/register' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "first_name" :"jainy",
-    "middle_name" : null,
-    "last_name" : null,
-    "email" :"jainy.joy123@gmail.com",
-    "password": "password@123"
-}'
-```
-3. User Login
-```curl
-curl --location 'http://localhost:5000/login' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "email" :"jainy.joy123@gmail.com",
-    "password": "password@123"
-}'
-```
-4. Get user profile
-```curl
-curl --location 'http://localhost:5000/my-profile' \
---header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyMjIyMzYxOCwianRpIjoiM2ZjNDYyM2MtNTg1Mi00YTYzLTgwYTAtZjE0ZWQ0NmQ1YTI4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImphaW55LmpveTEyM0BnbWFpbC5jb20iLCJuYmYiOjE3MjIyMjM2MTgsImNzcmYiOiIxNjMyNWFhMi1hYWU1LTRiYTQtOWEyMS01MzJmMDhlZjAxZjEiLCJleHAiOjE3MjIyMjcyMTh9.5ZqaW3d3CZ7WJBpggsuxaHYRlxpBYIZz8o59w1lZHvA'
-
-```
+1. Please find the requests in Postman collection- [book_management_service.postman_collection.json](book_management_service.postman_collection.json)

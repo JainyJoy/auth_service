@@ -29,3 +29,25 @@ class RegistrationPayload(BaseModel):
 class LoginPayload(BaseModel):
     email: constr(max_length=50)
     password: constr(max_length=20)
+
+
+class BookCreationPayload(BaseModel):
+    title: constr(max_length=400) = Field(title="Title")
+    author: constr(max_length=200) = Field(title="Author")
+    genre: constr(max_length=200) = Field(title="Genre")
+    year_published: int = Field(title="Year Published")
+    summary: constr(max_length=10000) = Field(title="Summary")
+
+
+class ReviewCreationPayload(BaseModel):
+    user_id: int
+    review_text: constr(max_length=10000) = Field(title="Review Text")
+    rating: int = Field(title="Rating")
+
+
+class BookUpdatePayload(BaseModel):
+    title: Optional[constr(max_length=400)] = Field(title="Title", default=None)
+    author: Optional[constr(max_length=200)] = Field(title="Author", default=None)
+    genre: Optional[constr(max_length=200)] = Field(title="Genre", default=None)
+    year_published: Optional[int] = Field(title="Year Published", default=None)
+    summary: Optional[constr(max_length=10000)] = Field(title="Summary", default=None)
